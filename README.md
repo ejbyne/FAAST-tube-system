@@ -1,4 +1,4 @@
 FAAST-tube-system
 =================
 
-Makers Academy week 2 project
+Makers Academy week 1 challenge
