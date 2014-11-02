@@ -24,7 +24,7 @@ module PassengerContainer
 
   def receive_passenger(*passenger)
     #raise "Cannot process request" unless passenger.first.is_a?(Passenger)
-    raise "Station full" if full_of_passengers?
+    raise "Cannot enter" if full_of_passengers? || passenger.first.credit < 2
     passengers << passenger.first
   end
 

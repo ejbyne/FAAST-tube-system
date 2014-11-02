@@ -7,8 +7,8 @@ DEFAULT_CARRIAGE_COUNT = 5
     @current_station = options.fetch(:initial_station, DEFAULT_INITIAL_STATION)
     @set_carriage_count = options.fetch(:carriage_count, DEFAULT_CARRIAGE_COUNT)
     @carriages = []
-    @set_carriage_count.times { @carriages << "carriage" } #this class instance needs to be set up?
-   # current_station.receive_train(self) #this class instance needs to be set up?
+    @set_carriage_count.times { @carriages << Carriage.new(train: self) } #this class instance needs to be set up?
+    #@current_station.receive_train(self) #this class instance needs to be set up?
   end
 
   def current_station
@@ -34,9 +34,9 @@ DEFAULT_CARRIAGE_COUNT = 5
   #   @carriage_capacity
   # end
 
-  # def carriages
-  #   @carriages
-  # end
+  def carriages
+    @carriages
+  end
 
   # def full_of_carriages?
   #   carriage_count == carriage_capacity

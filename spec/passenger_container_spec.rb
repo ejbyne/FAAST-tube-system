@@ -5,14 +5,15 @@ class ContainerHolder; include PassengerContainer; end
 describe PassengerContainer do
 
   let (:holder) { ContainerHolder.new }
-  let (:passenger) { double :passenger }
+  #let (:passenger) { double :passenger }
+  let (:passenger) { Passenger.new }
   let (:station) { Station.new }
 
   def fill_holder_with_passengers
     40.times { holder.receive_passenger(passenger) }
   end
 
-  it "should be able to accept a person" do
+  it "should be able to receive a person" do
     expect(holder.passenger_count).to eq(0)
     holder.receive_passenger(passenger)
     expect(holder.passenger_count).to eq(1)
@@ -49,7 +50,8 @@ describe PassengerContainer do
   end
 
   it "should only release one passenger at a time" do
-    second_passenger = double :passenger
+    #second_passenger = double :passenger
+    second_passenger = Passenger.new
     holder.receive_passenger(passenger)
     holder.receive_passenger(second_passenger)
     holder.release_passenger(passenger, second_passenger)
