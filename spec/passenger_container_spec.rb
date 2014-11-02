@@ -9,7 +9,7 @@ describe PassengerContainer do
   let (:station) { Station.new }
 
   def fill_holder_with_passengers
-    100.times { holder.receive_passenger(passenger) }
+    50.times { holder.receive_passenger(passenger) }
   end
 
   it "should be able to accept a person" do
@@ -60,6 +60,6 @@ describe PassengerContainer do
   #   expect(lambda {holder.release_passenger(passenger)} ).to raise_error(RuntimeError)
   # end
 
-  it "should only receive passengers with an account and a minimum credit of £2"
+  it "should only receive passengers with a minimum credit of £2"
   
 end

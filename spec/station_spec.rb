@@ -9,13 +9,13 @@ describe Station do
     6.times { station.receive_train(train) }
   end
 
-  it "should have default capacities if none are specified" do
+  it "should have default train and passenger capacities if none are specified" do
     default_station = Station.new
     expect(default_station.train_capacity).to eq(2)
-    expect(default_station.passenger_capacity).to eq(100)
+    expect(default_station.passenger_capacity).to eq(50)
   end
 
-  it "should allow setting initial capacities on initializing" do
+  it "should allow setting train and passenger capacities on initializing" do
     expect(station.train_capacity).to eq(6)
     expect(station.passenger_capacity).to eq(300)
   end

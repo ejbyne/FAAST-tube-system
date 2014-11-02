@@ -1,6 +1,6 @@
 module PassengerContainer
 
-  DEFAULT_PASSENGER_CAPACITY = 100
+  DEFAULT_PASSENGER_CAPACITY = 50
 
   def passengers
     @passengers ||= []

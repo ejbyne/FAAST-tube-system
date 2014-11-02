@@ -15,6 +15,10 @@ DEFAULT_CARRIAGE_COUNT = 5
     @current_station
   end
 
+  #  def current_station=(new_station)
+  #   @current_station = new_station
+  # end
+
   def carriage_count
     @carriages.count
   end
@@ -25,10 +29,6 @@ DEFAULT_CARRIAGE_COUNT = 5
     end_station.receive_train(self)
     @current_station = end_station
   end
-
- # def current_station=(new_station)
-  #   @current_station = new_station
-  # end
 
   # def carriage_capacity
   #   @carriage_capacity
