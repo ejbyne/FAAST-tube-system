@@ -14,9 +14,9 @@ class Passenger
     @current_station ||= nil
   end
 
-  def current_station=(station)
-    @current_station = station
-  end
+  # def current_station=(station)
+  #   @current_station = station
+  # end
 
   def touch_in(station)
     station.receive_passenger(self)
@@ -30,8 +30,13 @@ class Passenger
 
   def board(carriage)
     raise "Cannot board" unless current_station == carriage.train.current_station
-    self.touch_out(current_station)
+    touch_out(current_station)
     carriage.receive_passenger(self)
+  end
+
+  def alight(carriage)
+    carriage.release_passenger(self)
+    carriage.train.current_station.receive_passenger(self)
   end
 
 end

@@ -62,6 +62,4 @@ describe PassengerContainer do
   #   expect(lambda {holder.release_passenger(passenger)} ).to raise_error(RuntimeError)
   # end
 
-  it "should only receive passengers with a minimum credit of £2"
-  
 end
