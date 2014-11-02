@@ -6,9 +6,9 @@ class Station
 
   DEFAULT_TRAIN_CAPACITY = 2
 
-  def initialize(capacities = {})
-    @train_capacity = capacities.fetch(:train_capacity, DEFAULT_TRAIN_CAPACITY)
-    self.passenger_capacity = capacities.fetch(:passenger_capacity, DEFAULT_PASSENGER_CAPACITY)
+  def initialize(options = {})
+    @train_capacity = options.fetch(:train_capacity, DEFAULT_TRAIN_CAPACITY)
+    self.passenger_capacity = options.fetch(:passenger_capacity, DEFAULT_PASSENGER_CAPACITY)
     @trains = []
   end
 
@@ -31,6 +31,7 @@ class Station
   end
 
   def release_train(*train)
+    #raise "Cannot process request" unless train.first.is_a?(Train)
     @trains.delete(train.first)
   end
 
