@@ -1,35 +1,65 @@
-module PassengerContainer
+require 'passenger_container'
 
-  DEFAULT_PASSENGER_CAPACITY = 100
+class ContainerHolder; include PassengerContainer; end
 
-  def passengers
-    @passengers ||= []
+describe PassengerContainer do
+
+  let (:holder) { ContainerHolder.new }
+  let (:passenger) { double :passenger }
+  let (:station) { Station.new }
+
+  def fill_holder_with_passengers
+    100.times { holder.receive_passenger(passenger) }
   end
 
-  def passenger_capacity
-    @passenger_capacity ||= DEFAULT_PASSENGER_CAPACITY
+  it "should be able to accept a person" do
+    expect(holder.passenger_count).to eq(0)
+    holder.receive_passenger(passenger)
+    expect(holder.passenger_count).to eq(1)
   end
 
-  def passenger_capacity=(value)
-    @passenger_capacity = value
+  it "should be able to release a passenger" do
+    holder.receive_passenger(passenger)
+    holder.release_passenger(passenger)
+    expect(holder.passenger_count).to eq(0)
   end
 
-  def passenger_count
-    passengers.count
+  it "should know when it's full of passengers" do
+    expect(holder).not_to be_full_of_passengers
+    fill_holder_with_passengers
+    expect(holder).to be_full_of_passengers
   end
 
-  def full_of_passengers?
-    passenger_count == passenger_capacity
+  it "cannot receive more passengers than its capacity" do
+    fill_holder_with_passengers
+    expect(lambda { holder.receive_passenger(passenger) }).to raise_error(RuntimeError)
   end
 
-  def receive_passenger(*passenger)
-    #raise "Cannot process request" unless passenger.first.is_a?(Passenger)
-    raise "Station full" if full_of_passengers?
-    passengers << passenger.first
+  # it "should only receive passengers with receive_passenger" do
+  #   expect(lambda { holder.receive_passenger(:not_a_passenger)} ).to raise_error(RuntimeError)
+  # end
+
+  # it "should raise an error if empty argument is passed to receive_passenger" do
+  #   expect(lambda { holder.receive_passenger() } ).to raise_error(RuntimeError)
+  # end
+
+  it "should only accept one passenger at a time" do
+    holder.receive_passenger(passenger, passenger)
+    expect(holder.passenger_count).to eq(1)
   end
 
-  def release_passenger(*passenger)
-    passengers.delete(passenger.first)
+  it "should only release one passenger at a time" do
+    second_passenger = double :passenger
+    holder.receive_passenger(passenger)
+    holder.receive_passenger(second_passenger)
+    holder.release_passenger(passenger, second_passenger)
+    expect(holder.passenger_count).to eq(1)
   end
 
+  # it "should not release a passenger who isn't there" do
+  #   expect(lambda {holder.release_passenger(passenger)} ).to raise_error(RuntimeError)
+  # end
+
+  it "should only receive passengers with an account and a minimum credit of £2"
+  
 end
