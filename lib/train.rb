@@ -1,33 +1,22 @@
 class Train
 
 DEFAULT_INITIAL_STATION = :depot #this class instance needs to be set up?
-DEFAULT_CARRIAGE_CAPACITY = 5
+DEFAULT_CARRIAGE_COUNT = 5
 
   def initialize(options = {})
     @current_station = options.fetch(:initial_station, DEFAULT_INITIAL_STATION)
-    @carriage_capacity = options.fetch(:carriage_capacity, DEFAULT_CARRIAGE_CAPACITY)
+    @set_carriage_count = options.fetch(:carriage_count, DEFAULT_CARRIAGE_COUNT)
     @carriages = []
-    #@current_station.receive_train(self)
+    @set_carriage_count.times { @carriages << "carriage" } #this class instance needs to be set up?
+   # current_station.receive_train(self) #this class instance needs to be set up?
   end
 
   def current_station
     @current_station
   end
 
-  def carriage_capacity
-    @carriage_capacity
-  end
-
-  def carriages
-    @carriages
-  end
-
   def carriage_count
-    carriages.count
-  end
-
-  def full_of_carriages?
-    carriage_count == carriage_capacity
+    @carriages.count
   end
 
   def move(start_station, end_station)
@@ -37,15 +26,31 @@ DEFAULT_CARRIAGE_CAPACITY = 5
     @current_station = end_station
   end
 
-  def add_carriage(*carriage)
-    #raise "Cannot process request" unless carriage.first.is_a?(Carriage)
-    raise "Maximum carriages reached" if full_of_carriages?
-    carriages << carriage.first
-  end
+ # def current_station=(new_station)
+  #   @current_station = new_station
+  # end
 
-  def remove_carriage(*carriage)
-    #raise "Cannot process request" unless carriage.first.is_a?(Carriage)
-    carriages.delete(carriage.first)
-  end
+  # def carriage_capacity
+  #   @carriage_capacity
+  # end
+
+  # def carriages
+  #   @carriages
+  # end
+
+  # def full_of_carriages?
+  #   carriage_count == carriage_capacity
+  # end
+
+  # def add_carriage(*carriage)
+  #   #raise "Cannot process request" unless carriage.first.is_a?(Carriage)
+  #   raise "Maximum carriages reached" if full_of_carriages?
+  #   carriages << carriage.first
+  # end
+
+  # def remove_carriage(*carriage)
+  #   #raise "Cannot process request" unless carriage.first.is_a?(Carriage)
+  #   carriages.delete(carriage.first)
+  # end
 
 end
