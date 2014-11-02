@@ -23,12 +23,13 @@ module PassengerContainer
   end
 
   def receive_passenger(*passenger)
-    #raise "Cannot process request" unless passenger.first.is_a?(Passenger)
+    raise "Cannot process request" unless passenger.first.is_a?(Passenger)
     raise "Cannot enter" if full_of_passengers? || passenger.first.credit < 2
     passengers << passenger.first
   end
 
   def release_passenger(*passenger)
+    raise "Passenger not there" unless passengers.include?(passenger.first)
     passengers.delete(passenger.first)
   end
 

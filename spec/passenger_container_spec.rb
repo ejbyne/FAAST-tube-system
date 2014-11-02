@@ -36,13 +36,13 @@ describe PassengerContainer do
     expect(lambda { holder.receive_passenger(passenger) }).to raise_error(RuntimeError)
   end
 
-  # it "should only receive passengers with receive_passenger" do
-  #   expect(lambda { holder.receive_passenger(:not_a_passenger)} ).to raise_error(RuntimeError)
-  # end
+  it "should only receive passengers with receive_passenger" do
+    expect(lambda { holder.receive_passenger(:not_a_passenger)} ).to raise_error(RuntimeError)
+  end
 
-  # it "should raise an error if empty argument is passed to receive_passenger" do
-  #   expect(lambda { holder.receive_passenger() } ).to raise_error(RuntimeError)
-  # end
+  it "should raise an error if empty argument is passed to receive_passenger" do
+    expect(lambda { holder.receive_passenger() } ).to raise_error(RuntimeError)
+  end
 
   it "should only accept one passenger at a time" do
     holder.receive_passenger(passenger, passenger)
@@ -58,8 +58,8 @@ describe PassengerContainer do
     expect(holder.passenger_count).to eq(1)
   end
 
-  # it "should not release a passenger who isn't there" do
-  #   expect(lambda {holder.release_passenger(passenger)} ).to raise_error(RuntimeError)
-  # end
+  it "should not release a passenger who isn't there" do
+    expect(lambda {holder.release_passenger(passenger)} ).to raise_error(RuntimeError)
+  end
 
 end

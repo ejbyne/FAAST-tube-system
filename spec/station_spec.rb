@@ -3,7 +3,9 @@ require 'station'
 describe Station do
 
   let (:station) { Station.new(train_capacity: 6, passenger_capacity: 300) }
-  let (:train) { double :train }
+  let (:station2) { Station.new }
+  let (:train) { Train.new(initial_station: station2) }
+  #let (:train) { double :train }
 
   def fill_station_with_trains
     6.times { station.receive_train(train) }
@@ -43,13 +45,13 @@ describe Station do
     expect(lambda { station.receive_train(train)} ).to raise_error(RuntimeError)
   end
 
-  # it "should only receive tube trains with receive_train" do
-  #   expect(lambda { station.receive_train(:not_a_train) }).to raise_error(RuntimeError)
-  # end
+  it "should only receive tube trains with receive_train" do
+    expect(lambda { station.receive_train(:not_a_train) }).to raise_error(RuntimeError)
+  end
 
-  # it "should raise an error if empty argument is passed to receive_train" do
-  #   expect(lambda {station.receive_train()} ).to raise_error(RuntimeError)
-  # end
+  it "should raise an error if empty argument is passed to receive_train" do
+    expect(lambda {station.receive_train()} ).to raise_error(RuntimeError)
+  end
 
   it "should only accept one train at at time" do
     station.receive_train(train, train)
@@ -57,15 +59,15 @@ describe Station do
   end
 
   it "should only release one train at a time" do
-    second_train = double :train
+    second_train = Train.new(initial_station: station2)
     station.receive_train(train)
     station.receive_train(second_train)
     station.release_train(train, second_train)
     expect(station.train_count).to eq(1)
   end
 
-  # it "should not release a train which isn't there" do
-  #   expect(lambda {station.release_train(train)} ).to raise_error(RuntimeError)
-  # end
+  it "should not release a train which isn't there" do
+    expect(lambda {station.release_train(train)} ).to raise_error(RuntimeError)
+  end
 
 end

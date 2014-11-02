@@ -25,13 +25,13 @@ class Station
   end
 
   def receive_train(*train)
-    #raise "Cannot process request" unless train.first.is_a?(Train)
+    raise "Cannot process request" unless train.first.is_a?(Train)
     raise "Station full" if full_of_trains?
     @trains << train.first
   end
 
   def release_train(*train)
-    #raise "Cannot process request" unless train.first.is_a?(Train)
+    raise "Train not there" unless @trains.include?(train.first)
     @trains.delete(train.first)
   end
 
