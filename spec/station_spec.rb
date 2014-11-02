@@ -12,7 +12,7 @@ describe Station do
   it "should have default train and passenger capacities if none are specified" do
     default_station = Station.new
     expect(default_station.train_capacity).to eq(2)
-    expect(default_station.passenger_capacity).to eq(50)
+    expect(default_station.passenger_capacity).to eq(40)
   end
 
   it "should allow setting train and passenger capacities on initializing" do

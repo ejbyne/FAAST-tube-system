@@ -9,7 +9,7 @@ describe PassengerContainer do
   let (:station) { Station.new }
 
   def fill_holder_with_passengers
-    50.times { holder.receive_passenger(passenger) }
+    40.times { holder.receive_passenger(passenger) }
   end
 
   it "should be able to accept a person" do
