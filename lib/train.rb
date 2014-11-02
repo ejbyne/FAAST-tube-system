@@ -1,10 +1,11 @@
 class Train
 
-DEFAULT_INITIAL_STATION = :depot #this class instance needs to be set up?
+# DEFAULT_INITIAL_STATION = :depot #this class instance needs to be set up?
 DEFAULT_CARRIAGE_COUNT = 5
 
   def initialize(options = {})
-    @current_station = options.fetch(:initial_station, DEFAULT_INITIAL_STATION)
+    raise "Please specify initial station" if options[:initial_station].nil?
+    @current_station = options.fetch(:initial_station) #, DEFAULT_INITIAL_STATION)
     @set_carriage_count = options.fetch(:carriage_count, DEFAULT_CARRIAGE_COUNT)
     @carriages = []
     @set_carriage_count.times { @carriages << Carriage.new(train: self) } #this class instance needs to be set up?

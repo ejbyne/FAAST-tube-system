@@ -10,12 +10,6 @@ describe Train do
   #let (:depot) { double :station }
   # let (:carriage) {double :carriage }
 
-
-  # it "has a default initial station" do
-  #   expect(default_train.current_station).to be(:depot) #need class instance?
-  #   #expect(default_train.current_station).to receive(receive_train).with(default_train)
-  # end
-
   it "allows an initial station to be set" do
     expect(train.current_station).to be(station) #need class instance?
     #expect(train.current_station).to receive(receive_train).with(train)
@@ -36,6 +30,11 @@ describe Train do
     train.move(old_street, bank)
     expect(train.current_station).to be(bank)
   end
+
+  # it "has a default initial station" do
+  #   expect(default_train.current_station).to be(:depot) #need class instance?
+  #   #expect(default_train.current_station).to receive(receive_train).with(default_train)
+  # end
 
   # it "has a default carriage capacity" do
   #   expect(default_train.carriage_capacity).to be(5)
