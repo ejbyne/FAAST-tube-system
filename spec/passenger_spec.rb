@@ -24,12 +24,6 @@ describe Passenger do
     passenger.touch_out(station)
   end
 
-  it "should not be able to touch in at a station if the station is full of passengers" do
-    41.times { expect(station).to receive(:receive_passenger).with(passenger) }
-    fill_station
-    # expect(lambda { passenger.touch_in(test_station) }).to raise_error(RuntimeError)
-  end
-
   # it "should not be able to touch in at a station if he/she does not have at least GBP 2 credit" do
   #   expect( lambda { passenger_with_low_credit.touch_in(test_station) }).to raise_error(RuntimeError)
   # end
@@ -72,7 +66,7 @@ describe Passenger do
 
 end
 
-# require 'passenger'
+# TESTS WITHOUT DOUBLES
 
 # describe Passenger do
   

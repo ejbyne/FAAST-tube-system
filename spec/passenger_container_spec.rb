@@ -6,6 +6,7 @@ describe PassengerContainer do
 
   let (:holder) { ContainerHolder.new }
   let (:passenger) { double :passenger, is_a?: Passenger, credit: 10 }
+  let (:passenger_with_low_credit) { double :passenger, is_a?: Passenger, credit: 1 }
   let (:station) { double :station }
 
   def fill_holder_with_passengers
@@ -43,6 +44,10 @@ describe PassengerContainer do
     expect(lambda { holder.receive_passenger() } ).to raise_error(RuntimeError)
   end
 
+  it "should not receive a passenger if he/she does not have at least GBP 2 credit" do
+    expect( lambda { passenger_with_low_credit.touch_in(test_station) }).to raise_error(RuntimeError)
+  end
+
   it "should only accept one passenger at a time" do
     holder.receive_passenger(passenger, passenger)
     expect(holder.passenger_count).to eq(1)
@@ -62,7 +67,7 @@ describe PassengerContainer do
 
 end
 
-# TEST WITHOUT DOUBLES:
+# TESTS WITHOUT DOUBLES:
 # describe PassengerContainer do
 
 #   let (:holder) { ContainerHolder.new }
