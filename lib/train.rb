@@ -1,5 +1,7 @@
 class Train
 
+attr_reader :current_station, :set_carriage_count, :carriages, :carriage_count
+
 DEFAULT_CARRIAGE_COUNT = 5
 
   def initialize(options = {})
@@ -8,23 +10,8 @@ DEFAULT_CARRIAGE_COUNT = 5
     @set_carriage_count = options.fetch(:carriage_count, DEFAULT_CARRIAGE_COUNT)
     @carriages = []
     @set_carriage_count.times { @carriages << Carriage.new(train: self) }
+    @carriage_count = @carriages.count
     @current_station.receive_train(self)
-  end
-
-  def current_station
-    @current_station
-  end
-
-  def set_carriage_count
-    @set_carriage_count
-  end
-
-   def carriages
-    @carriages
-  end
-
-  def carriage_count
-    @carriages.count
   end
 
   def move(start_station, end_station)

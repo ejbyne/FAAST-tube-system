@@ -2,6 +2,8 @@ module PassengerContainer
 
   DEFAULT_PASSENGER_CAPACITY = 40
 
+  @passengers ||= []
+
   def passengers
     @passengers ||= []
   end

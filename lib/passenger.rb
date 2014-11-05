@@ -2,20 +2,11 @@ class Passenger
 
   DEFAULT_CREDIT = 10
 
+  attr_reader :credit, :current_station
+
   def initialize(options = {})
     @credit = options.fetch(:credit, DEFAULT_CREDIT)
-  end
-
-  def credit
-    @credit
-  end
-
-  def current_station
     @current_station ||= nil
-  end
-
-  def current_station=(value)
-    @current_station = value
   end
 
   def touch_in(station)
