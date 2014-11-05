@@ -9,7 +9,7 @@ DEFAULT_CARRIAGE_COUNT = 5
     @current_station = options.fetch(:initial_station)
     @set_carriage_count = options.fetch(:carriage_count, DEFAULT_CARRIAGE_COUNT)
     @current_station.receive_train(self)
-    add_carriages 
+    add_carriages
   end
 
   def add_carriages
