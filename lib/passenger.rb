@@ -14,9 +14,9 @@ class Passenger
     @current_station ||= nil
   end
 
-  # def current_station=(station)
-  #   @current_station = station
-  # end
+  def current_station=(value)
+    @current_station = value
+  end
 
   def touch_in(station)
     station.receive_passenger(self)

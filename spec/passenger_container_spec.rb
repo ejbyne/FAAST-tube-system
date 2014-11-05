@@ -45,7 +45,7 @@ describe PassengerContainer do
   end
 
   it "should not receive a passenger if he/she does not have at least GBP 2 credit" do
-    expect( lambda { passenger_with_low_credit.touch_in(test_station) }).to raise_error(RuntimeError)
+    expect( lambda { holder.receive_passenger(passenger_with_low_credit) }).to raise_error(RuntimeError)
   end
 
   it "should only accept one passenger at a time" do
