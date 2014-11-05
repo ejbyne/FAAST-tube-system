@@ -15,6 +15,10 @@ DEFAULT_CARRIAGE_COUNT = 5
     @current_station
   end
 
+  def set_carriage_count
+    @set_carriage_count
+  end
+
    def carriages
     @carriages
   end

@@ -28,6 +28,10 @@ describe PassengerContainer do
     expect(holder.passenger_count).to eq(0)
   end
 
+  it "should have a maximum capacity of 40" do
+    expect(holder.passenger_capacity).to eq(40)
+  end
+
   it "should know when it's full of passengers" do
     fill_holder_with_passengers
     expect(holder).to be_full_of_passengers
