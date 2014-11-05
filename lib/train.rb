@@ -8,10 +8,14 @@ DEFAULT_CARRIAGE_COUNT = 5
     raise "Please specify initial station" if options[:initial_station].nil?
     @current_station = options.fetch(:initial_station)
     @set_carriage_count = options.fetch(:carriage_count, DEFAULT_CARRIAGE_COUNT)
+    @current_station.receive_train(self)
+    add_carriages 
+  end
+
+  def add_carriages
     @carriages = []
     @set_carriage_count.times { @carriages << Carriage.new(train: self) }
     @carriage_count = @carriages.count
-    @current_station.receive_train(self)
   end
 
   def move(start_station, end_station)

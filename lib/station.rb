@@ -4,7 +4,7 @@ class Station
 
   include PassengerContainer
 
-  attr_reader :train_capacity
+  attr_reader :train_capacity, :trains
 
   DEFAULT_TRAIN_CAPACITY = 2
 

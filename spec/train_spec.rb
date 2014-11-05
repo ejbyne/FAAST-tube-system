@@ -3,7 +3,7 @@ require 'train'
 describe Train do
 
   let (:station) { double :station }
-  let (:station2) { double :station, full_of_trains?: false }
+  let (:second_station) { double :station, full_of_trains?: false }
 
   context "initial station" do
 
@@ -42,9 +42,9 @@ describe Train do
       allow(station).to receive(:receive_train)
       train = Train.new(initial_station: station)
       allow(station).to receive(:release_train).with(train)
-      allow(station2).to receive(:receive_train).with(train)
-      train.move(station, station2)
-      expect(train.current_station).to be(station2)
+      allow(second_station).to receive(:receive_train).with(train)
+      train.move(station, second_station)
+      expect(train.current_station).to be(second_station)
     end
 
   end
