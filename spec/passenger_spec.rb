@@ -6,7 +6,7 @@ describe Passenger do
   let (:passenger_with_low_credit) { Passenger.new(credit: 1) }
   let (:station) { double :station }
   let (:train) { double :train, current_station: station }
-  let (:carriage) { double :carriage, train: train }
+  let (:carriage) { double :carriage, train: train, current_station: station }
 
   context "passenger credit" do
 

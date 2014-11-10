@@ -28,8 +28,8 @@ class Passenger
 
   def alight(carriage)
     carriage.release_passenger(self)
-    carriage.train.current_station.receive_passenger(self)
-    @current_station = carriage.train.current_station
+    carriage.current_station.receive_passenger(self)
+    @current_station = carriage.current_station
   end
 
 end

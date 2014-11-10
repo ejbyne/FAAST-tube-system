@@ -11,4 +11,8 @@ class Carriage
     @train = options.fetch(:train)
   end
 
+  def current_station
+    @train.current_station
+  end
+
 end
