@@ -9,6 +9,7 @@ class Carriage
   def initialize(options = {})
     raise "Please specify train" if options[:train].nil?
     @train = options.fetch(:train)
+    @train.carriages << self
   end
 
   def current_station

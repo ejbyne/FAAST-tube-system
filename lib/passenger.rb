@@ -20,7 +20,7 @@ class Passenger
   end
 
   def board(carriage)
-    raise "Cannot board" unless current_station == carriage.train.current_station
+    raise "Cannot board" unless current_station == carriage.current_station
     touch_out(current_station)
     carriage.receive_passenger(self)
     @current_station = nil

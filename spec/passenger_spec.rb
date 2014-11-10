@@ -59,7 +59,7 @@ describe Passenger do
     it "should not be able to board a carriage of a train which is not at the same station as he/she" do
       second_station = double :station 
       second_train = double :train, current_station: second_station
-      second_carriage = double :carriage, train: second_train
+      second_carriage = double :carriage, train: second_train, current_station: second_station
       allow(station).to receive(:receive_passenger).with(passenger)
       passenger.touch_in(station)
       expect(lambda { passenger.board(second_carriage) }).to raise_error(RuntimeError)

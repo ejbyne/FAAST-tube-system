@@ -16,22 +16,10 @@ describe Train do
 
   context "carriages" do
 
-    it "has a default number of carriages" do
+    it "is initiated without any carriages" do
       allow(station).to receive(:receive_train)
       train = Train.new(initial_station: station)
-      expect(train.set_carriage_count).to eq(5)
-    end
-
-    it "allows the number of carriages to be set on initializing" do
-      allow(station).to receive(:receive_train)
-      train = Train.new(initial_station: station, carriage_count: 7)
-      expect(train.set_carriage_count).to eq(7)
-    end
-
-    it 'can hold carriages' do
-      allow(station).to receive(:receive_train)
-      train = Train.new(initial_station: station, carriage_count: 7)
-      expect(train.carriage_count).to eq(7)
+      expect(train.carriage_count).to eq(0)
     end
 
   end
