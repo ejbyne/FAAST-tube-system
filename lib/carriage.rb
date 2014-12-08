@@ -16,4 +16,15 @@ class Carriage
     @train.current_station
   end
 
+  def accept_board(passenger)
+    raise "Cannot board" unless passenger.current_station == current_station
+    current_station.release_passenger(passenger)
+    receive_passenger(passenger)
+  end
+
+  def accept_alight(passenger)
+    release_passenger(passenger)
+    current_station.receive_passenger(passenger)
+  end
+
 end

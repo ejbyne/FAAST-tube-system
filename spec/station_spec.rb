@@ -4,6 +4,8 @@ describe Station do
 
   let (:station) { Station.new(train_capacity: 6, passenger_capacity: 300) }
   let (:train) { double :train, is_a?: Train }
+  let (:passenger) { double :passenger }
+  
 
   def fill_station_with_trains
     6.times { station.receive_train(train) }
@@ -56,19 +58,6 @@ describe Station do
       expect(lambda { station.receive_train(train)} ).to raise_error(RuntimeError)
     end
 
-    it "should only receive trains with receive_train" do
-      expect(lambda { station.receive_train(:not_a_train) }).to raise_error(RuntimeError)
-    end
-
-    it "should raise an error if empty argument is passed to receive_train" do
-      expect(lambda {station.receive_train()} ).to raise_error(RuntimeError)
-    end
-
-    it "should only accept one train at at time" do
-      station.receive_train(train, train)
-      expect(station.train_count).to eq(1)
-    end
-
   end
 
   context "releasing trains" do
@@ -79,17 +68,27 @@ describe Station do
       expect(station.train_count).to eq(0)
     end
 
-    it "should only release one train at a time" do
-      second_station = Station.new
-      second_train = double :train, is_a?: Train, initial_station: second_station
-      station.receive_train(train)
-      station.receive_train(second_train)
-      station.release_train(train, second_train)
-      expect(station.train_count).to eq(1)
-    end
-
     it "should not release a train which isn't there" do
       expect(lambda {station.release_train(train)} ).to raise_error(RuntimeError)
+    end
+
+  end
+
+  context "passengers touching in and out of stations" do
+
+    it "should allow a passenger to touch in" do
+      expect(station).to receive(:receive_passenger)
+      expect(passenger).to receive(:current_station=).with(station)
+      station.allow_touch_in(passenger)
+    end
+
+    it "should allow a passenger to touch out" do
+      allow(station).to receive(:receive_passenger)
+      allow(passenger).to receive(:current_station=).with(station)
+      station.allow_touch_in(passenger)
+      expect(station).to receive(:release_passenger)
+      expect(passenger).to receive(:current_station=).with(nil)
+      station.allow_touch_out(passenger)
     end
 
   end

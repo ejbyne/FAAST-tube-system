@@ -20,40 +20,11 @@ describe Passenger do
 
   end
 
-  context "touching in and out of stations" do
-
-    it "should be able to touch in at a station" do
-      expect(station).to receive(:receive_passenger).with(passenger)
-      passenger.touch_in(station)
-    end
-
-    it "should be able to touch out at a station" do
-      expect(station).to receive(:release_passenger).with(passenger)
-      passenger.touch_out(station)
-    end
-
-  end
-
   context "boarding carriages" do
 
-    it "should be should be released from a station when he/she boards a carriage" do
-      allow(station).to receive(:receive_passenger).with(passenger)
-      passenger.touch_in(station)
-      expect(station).to receive(:release_passenger).with(passenger)
-      allow(carriage).to receive(:receive_passenger).with(passenger)
-      passenger.board(carriage)
-    end
-
-    it "should be received by the carriage when he/she boards it" do
-      allow(station).to receive(:receive_passenger).with(passenger)
-      passenger.touch_in(station)
-      allow(station).to receive(:release_passenger).with(passenger)
-      expect(carriage).to receive(:receive_passenger).with(passenger)
-      passenger.board(carriage)
-    end
-
-    it "should not be able to board a carriage before it touches in at the station" do
-      expect(lambda { passenger.board(carriage) }).to raise_error(RuntimeError)
+    it "should allow its current station to be changed" do
+      passenger.current_station = station
+      expect(passenger.current_station).to be(station)
     end
 
     it "should not be able to board a carriage of a train which is not at the same station as he/she" do

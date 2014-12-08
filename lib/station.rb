@@ -22,15 +22,24 @@ class Station
     train_count == train_capacity
   end
 
-  def receive_train(*train)
-    raise "Cannot process request" unless train.first.is_a?(Train)
+  def receive_train(train)
     raise "Station full" if full_of_trains?
-    @trains << train.first
+    @trains << train
   end
 
-  def release_train(*train)
-    raise "Train not there" unless @trains.include?(train.first)
-    @trains.delete(train.first)
+  def release_train(train)
+    raise "Train not there" unless @trains.include?(train)
+    @trains.delete(train)
+  end
+
+  def allow_touch_in(passenger)
+    self.receive_passenger(passenger)
+    passenger.current_station = self
+  end
+
+  def allow_touch_out(passenger)
+    self.release_passenger(passenger)
+    passenger.current_station = nil
   end
 
 end

@@ -32,7 +32,7 @@ describe PassengerContainer do
       expect(holder.passenger_count).to eq(0)
     end
 
-    it "should be able to receive a person" do
+    it "should be able to receive a passenger" do
       holder.receive_passenger(passenger)
       expect(holder.passenger_count).to eq(1)
     end
@@ -47,21 +47,8 @@ describe PassengerContainer do
       expect(lambda { holder.receive_passenger(passenger) }).to raise_error(RuntimeError)
     end
 
-    it "should only receive passengers with receive_passenger" do
-      expect(lambda { holder.receive_passenger(:not_a_passenger)} ).to raise_error(RuntimeError)
-    end
-
-    it "should raise an error if empty argument is passed to receive_passenger" do
-      expect(lambda { holder.receive_passenger() } ).to raise_error(RuntimeError)
-    end
-
     it "should not receive a passenger if he/she does not have at least GBP 2 credit" do
       expect( lambda { holder.receive_passenger(passenger_with_low_credit) }).to raise_error(RuntimeError)
-    end
-
-    it "should only accept one passenger at a time" do
-      holder.receive_passenger(passenger, passenger)
-      expect(holder.passenger_count).to eq(1)
     end
 
   end
@@ -72,14 +59,6 @@ describe PassengerContainer do
       holder.receive_passenger(passenger)
       holder.release_passenger(passenger)
       expect(holder.passenger_count).to eq(0)
-    end
-
-    it "should only release one passenger at a time" do
-      second_passenger = double :passenger, is_a?: Passenger, credit: 10
-      holder.receive_passenger(passenger)
-      holder.receive_passenger(second_passenger)
-      holder.release_passenger(passenger, second_passenger)
-      expect(holder.passenger_count).to eq(1)
     end
 
     it "should not release a passenger who isn't there" do
