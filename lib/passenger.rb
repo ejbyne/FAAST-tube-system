@@ -14,4 +14,8 @@ class Passenger
     @current_station
   end
 
+  def has_insufficient_credit?
+    @credit < 2
+  end
+
 end

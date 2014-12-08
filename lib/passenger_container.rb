@@ -23,7 +23,7 @@ module PassengerContainer
   end
 
   def receive_passenger(passenger)
-    raise "Cannot enter" if full_of_passengers? || passenger.credit < 2
+    raise "Cannot enter" if full_of_passengers? || passenger.has_insufficient_credit?
     passengers << passenger
   end
 

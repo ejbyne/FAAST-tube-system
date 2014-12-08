@@ -28,17 +28,16 @@ class Station
   end
 
   def release_train(train)
-    raise "Train not there" unless @trains.include?(train)
     @trains.delete(train)
   end
 
-  def allow_touch_in(passenger)
-    self.receive_passenger(passenger)
+  def allow_enter(passenger)
+    receive_passenger(passenger)
     passenger.current_station = self
   end
 
-  def allow_touch_out(passenger)
-    self.release_passenger(passenger)
+  def allow_exit(passenger)
+    release_passenger(passenger)
     passenger.current_station = nil
   end
 

@@ -5,9 +5,9 @@ describe Carriage do
   let (:carriage) { Carriage.new(train: train) }
   let (:station) { double :station }
   let (:train) { double :train, current_station: station, carriages: [] }
-  let (:passenger) { double :passenger, current_station: station, credit: 10 }
+  let (:passenger) { double :passenger, current_station: station, has_insufficient_credit?: false }
 
-  context "capacity" do
+  context "its capacity" do
 
     it "should have a passenger capacity of 40" do
       expect(carriage.passenger_capacity).to eq(40)
@@ -31,6 +31,7 @@ describe Carriage do
 
     it "should allow a passenger to board" do
       allow(station).to receive(:release_passenger)
+      expect(passenger).to receive(:current_station=)
       carriage.accept_board(passenger)
       expect(carriage.passenger_count).to eq(1)
     end
@@ -48,9 +49,11 @@ describe Carriage do
 
     it "should allow a passenger to alight" do
       allow(station).to receive(:release_passenger)
+      expect(passenger).to receive(:current_station=)
       carriage.accept_board(passenger)
       allow(station).to receive(:receive_passenger)
       allow(station).to receive(:is_full_of_passengers?)
+      expect(passenger).to receive(:current_station=)
       carriage.accept_alight(passenger)
       expect(carriage.passenger_count).to eq(0)
     end

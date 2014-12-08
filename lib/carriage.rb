@@ -20,11 +20,13 @@ class Carriage
     raise "Cannot board" unless passenger.current_station == current_station
     current_station.release_passenger(passenger)
     receive_passenger(passenger)
+    passenger.current_station = nil
   end
 
   def accept_alight(passenger)
     current_station.receive_passenger(passenger)
     release_passenger(passenger)
+    passenger.current_station = current_station
   end
 
 end

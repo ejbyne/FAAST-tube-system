@@ -2,24 +2,24 @@ require 'station'
 
 describe Station do
 
-  let (:station) { Station.new(train_capacity: 6, passenger_capacity: 300) }
-  let (:train) { double :train, is_a?: Train }
-  let (:passenger) { double :passenger }
+  let (:station) { Station.new }
+  let (:train) { double :train }
+  let (:passenger) { double :passenger, has_insufficient_credit?: false }
   
 
   def fill_station_with_trains
-    6.times { station.receive_train(train) }
+    2.times { station.receive_train(train) }
   end
 
   context "train capacity" do
 
     it "should have a default train capacity if none is specified" do
-      default_station = Station.new
-      expect(default_station.train_capacity).to eq(2)
+      expect(station.train_capacity).to eq(2)
     end
 
     it "should allow setting the train capacity on initializing" do
-      expect(station.train_capacity).to eq(6)
+      second_station = Station.new(train_capacity: 6)
+      expect(second_station.train_capacity).to eq(6)
     end
 
   end
@@ -27,12 +27,12 @@ describe Station do
   context "passenger capacity" do
 
     it "should have a default passenger capacity if none is specified" do
-      default_station = Station.new
-      expect(default_station.passenger_capacity).to eq(40)
+      expect(station.passenger_capacity).to eq(40)
     end
 
     it "should allow setting the passenger capacity on initializing" do
-      expect(station.passenger_capacity).to eq(300)
+      third_station = Station.new(passenger_capacity: 300)
+      expect(third_station.passenger_capacity).to eq(300)
     end
 
   end
@@ -55,7 +55,7 @@ describe Station do
 
     it "cannot receive more than trains than its capacity" do
       fill_station_with_trains
-      expect(lambda { station.receive_train(train)} ).to raise_error(RuntimeError)
+      expect(lambda { station.receive_train(train)} ).to raise_error("Station full")
     end
 
   end
@@ -68,27 +68,22 @@ describe Station do
       expect(station.train_count).to eq(0)
     end
 
-    it "should not release a train which isn't there" do
-      expect(lambda {station.release_train(train)} ).to raise_error(RuntimeError)
-    end
-
   end
 
-  context "passengers touching in and out of stations" do
+  context "passengers entering and exiting stations" do
 
-    it "should allow a passenger to touch in" do
-      expect(station).to receive(:receive_passenger)
+    it "should allow a passenger to enter" do
       expect(passenger).to receive(:current_station=).with(station)
-      station.allow_touch_in(passenger)
+      station.allow_enter(passenger)
+      expect(station.passenger_count).to eq(1)
     end
 
-    it "should allow a passenger to touch out" do
-      allow(station).to receive(:receive_passenger)
+    it "should allow a passenger to exit" do
       allow(passenger).to receive(:current_station=).with(station)
-      station.allow_touch_in(passenger)
-      expect(station).to receive(:release_passenger)
+      station.allow_enter(passenger)
       expect(passenger).to receive(:current_station=).with(nil)
-      station.allow_touch_out(passenger)
+      station.allow_exit(passenger)
+      expect(station.passenger_count).to eq(0)
     end
 
   end

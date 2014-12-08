@@ -5,8 +5,8 @@ class ContainerHolder; include PassengerContainer; end
 describe PassengerContainer do
 
   let (:holder) { ContainerHolder.new }
-  let (:passenger) { double :passenger, credit: 10 }
-  let (:passenger_with_low_credit) { double :passenger, credit: 1 }
+  let (:passenger) { double :passenger, has_insufficient_credit?: false }
+  let (:passenger_with_low_credit) { double :passenger, has_insufficient_credit?: true }
 
   def fill_holder_with_passengers
     40.times { holder.receive_passenger(passenger) }
@@ -14,11 +14,11 @@ describe PassengerContainer do
 
   context "capacity" do
 
-    it "should have a default capacity" do
+    it "should have a default passenger capacity" do
       expect(holder.passenger_capacity).to eq(40)
     end
 
-    it "should allow the capacity to be set" do
+    it "should allow the passenger capacity to be set" do
       holder.passenger_capacity = 50
       expect(holder.passenger_capacity).to eq(50)
     end
