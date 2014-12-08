@@ -28,7 +28,6 @@ module PassengerContainer
   end
 
   def release_passenger(passenger)
-    raise "Passenger not there" unless passengers.include?(passenger)
     passengers.delete(passenger)
   end
 

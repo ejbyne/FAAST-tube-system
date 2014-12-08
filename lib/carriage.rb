@@ -23,8 +23,8 @@ class Carriage
   end
 
   def accept_alight(passenger)
-    release_passenger(passenger)
     current_station.receive_passenger(passenger)
+    release_passenger(passenger)
   end
 
 end

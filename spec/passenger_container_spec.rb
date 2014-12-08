@@ -5,9 +5,8 @@ class ContainerHolder; include PassengerContainer; end
 describe PassengerContainer do
 
   let (:holder) { ContainerHolder.new }
-  let (:passenger) { double :passenger, is_a?: Passenger, credit: 10 }
-  let (:passenger_with_low_credit) { double :passenger, is_a?: Passenger, credit: 1 }
-  let (:station) { double :station }
+  let (:passenger) { double :passenger, credit: 10 }
+  let (:passenger_with_low_credit) { double :passenger, credit: 1 }
 
   def fill_holder_with_passengers
     40.times { holder.receive_passenger(passenger) }
@@ -44,11 +43,11 @@ describe PassengerContainer do
 
     it "cannot receive more passengers than its capacity" do
       fill_holder_with_passengers
-      expect(lambda { holder.receive_passenger(passenger) }).to raise_error(RuntimeError)
+      expect(lambda { holder.receive_passenger(passenger) }).to raise_error("Cannot enter")
     end
 
     it "should not receive a passenger if he/she does not have at least GBP 2 credit" do
-      expect( lambda { holder.receive_passenger(passenger_with_low_credit) }).to raise_error(RuntimeError)
+      expect( lambda { holder.receive_passenger(passenger_with_low_credit) }).to raise_error("Cannot enter")
     end
 
   end
@@ -59,10 +58,6 @@ describe PassengerContainer do
       holder.receive_passenger(passenger)
       holder.release_passenger(passenger)
       expect(holder.passenger_count).to eq(0)
-    end
-
-    it "should not release a passenger who isn't there" do
-      expect(lambda {holder.release_passenger(passenger)} ).to raise_error(RuntimeError)
     end
 
   end

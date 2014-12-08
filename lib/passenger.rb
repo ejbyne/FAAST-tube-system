@@ -10,8 +10,8 @@ class Passenger
     @current_station ||= nil
   end
 
-  def current_station=(station)
-    @current_station = station
+  def current_station
+    @current_station
   end
 
 end
