@@ -2,7 +2,7 @@ require 'carriage'
 
 describe Carriage do
 
-  let (:carriage) { Carriage.new(train: train) }
+  let (:carriage) { Carriage.new }
   let (:station) { double :station }
   let (:train) { double :train, current_station: station, carriages: [] }
   let (:passenger) { double :passenger, current_station: station, has_insufficient_credit?: false }
@@ -15,19 +15,30 @@ describe Carriage do
 
   end
 
-  context "its train" do
+  context "coupling to a train" do
 
-    it "should be added to its train's carriages" do
+    it "it begins without a train" do
+      expect(carriage.train).to be nil
+    end
+
+    it "can couple to a train" do
+      carriage.couple_to(train)
+      expect(carriage.train).to be(train)
       expect(train.carriages).to include(carriage)
     end
 
     it "should have the same current station as its train" do
+      carriage.couple_to(train)
       expect(carriage.current_station).to eq(train.current_station)
     end
 
   end
 
   context "alighting and boarding" do
+
+    before {
+      carriage.couple_to(train)
+    }
 
     it "should allow a passenger to board" do
       allow(station).to receive(:release_passenger)
