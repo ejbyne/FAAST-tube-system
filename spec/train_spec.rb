@@ -18,7 +18,7 @@ describe Train do
 
   end
 
-  context "carriages" do
+  context "its carriages" do
 
     it "is initiated without any carriages" do
       expect(train.carriage_count).to eq(0)

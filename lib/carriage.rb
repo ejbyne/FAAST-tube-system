@@ -16,7 +16,7 @@ class Carriage
   end
 
   def current_station
-    raise "No current station" if train = nil
+    raise "No current station" if train == nil
     @current_station = @train.current_station
   end
 

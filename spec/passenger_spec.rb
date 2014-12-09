@@ -20,7 +20,7 @@ describe Passenger do
 
   context "boarding carriages" do
 
-    it "should allow its current station to be changed" do
+    it "should allow his/her current station to be changed" do
       expect(passenger.current_station).to be nil
       passenger.current_station = station
       expect(passenger.current_station).to be(station)

@@ -2,6 +2,8 @@ require 'station'
 
 describe Station do
 
+  it_behaves_like "a passenger_container"
+
   let (:station) { Station.new }
   let (:train) { double :train }
   let (:passenger) { double :passenger, has_insufficient_credit?: false }
@@ -9,32 +11,6 @@ describe Station do
 
   def fill_station_with_trains
     2.times { station.receive_train(train) }
-  end
-
-  context "train capacity" do
-
-    it "should have a default train capacity if none is specified" do
-      expect(station.train_capacity).to eq(2)
-    end
-
-    it "should allow setting the train capacity on initializing" do
-      second_station = Station.new(train_capacity: 6)
-      expect(second_station.train_capacity).to eq(6)
-    end
-
-  end
-
-  context "passenger capacity" do
-
-    it "should have a default passenger capacity if none is specified" do
-      expect(station.passenger_capacity).to eq(40)
-    end
-
-    it "should allow setting the passenger capacity on initializing" do
-      third_station = Station.new(passenger_capacity: 300)
-      expect(third_station.passenger_capacity).to eq(300)
-    end
-
   end
 
   context "receiving trains" do

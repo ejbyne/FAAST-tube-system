@@ -2,22 +2,16 @@ require 'carriage'
 
 describe Carriage do
 
+  it_behaves_like "a passenger_container"
+
   let (:carriage) { Carriage.new }
   let (:station) { double :station }
   let (:train) { double :train, current_station: station, carriages: [] }
   let (:passenger) { double :passenger, current_station: station, has_insufficient_credit?: false }
 
-  context "its capacity" do
-
-    it "should have a passenger capacity of 40" do
-      expect(carriage.passenger_capacity).to eq(40)
-    end
-
-  end
-
   context "coupling to a train" do
 
-    it "it begins without a train" do
+    it "begins without a train" do
       expect(carriage.train).to be nil
     end
 
@@ -47,7 +41,7 @@ describe Carriage do
       expect(carriage.passenger_count).to eq(1)
     end
 
-    it "should not allow a passenger to board a carriage before it touches in at the station" do
+    it "should not allow a passenger to board a carriage before he/she enters the station" do
       passenger_outside_station = double :passenger, current_station: nil
       allow(station).to receive(:release_passenger)
       expect(lambda { carriage.accept_board(passenger_outside_station) }).to raise_error("Cannot board")
