@@ -1,6 +1,6 @@
 require 'passenger_container'
 
-shared_examples "a passenger_container" do
+shared_examples "a passenger container" do
 
   let (:holder) { described_class.new }
   let (:passenger) { double :passenger, has_insufficient_credit?: false }

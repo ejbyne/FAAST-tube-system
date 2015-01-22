@@ -2,7 +2,7 @@ require 'carriage'
 
 describe Carriage do
 
-  it_behaves_like "a passenger_container"
+  it_behaves_like "a passenger container"
 
   let (:carriage) { Carriage.new }
   let (:station) { double :station }
