@@ -1,5 +1,4 @@
-FAAST Tube System
-=======================
+# FAAST Tube System
 
 ## Synopsis
 
@@ -42,4 +41,4 @@ Train method for moving from station to station:
 
 ## Takeaway
 
-This was an important challenge for consolidating my understanding of objected oriented programming in ruby, ruby modules and Rspec testing (including using doubles). Through my code refactoring and one to ones with the teaching staff I learnt how good OO programming should be structured, tested and presented.
+This was an important challenge for consolidating my understanding of objected oriented programming in Ruby, Ruby modules and Rspec testing (including using doubles). Through my code refactoring and one to ones with the teaching staff I learnt how good OO programming should be structured, tested and presented.
