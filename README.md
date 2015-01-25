@@ -1,6 +1,6 @@
 # FAAST Tube System
 
-## Synopsis
+## Summary
 
 Week 1 Makers Academy Challenge: the mayor of London has contacted the Greater London Authority to access the Transport for London Software Development and Deployment specifications for the new FAAST Tube System ( Fast And Accessible Super Tube). Your task is to implement the FAAST system so that it can be deployed into the London underground network.
 
