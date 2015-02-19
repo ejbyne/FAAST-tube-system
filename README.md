@@ -9,7 +9,7 @@ Week 1 Makers Academy Challenge: the mayor of London has contacted the Greater L
 
 This was an important challenge for consolidating my understanding of objected oriented programming in Ruby, Ruby modules and Rspec testing (including using doubles). Through my code refactoring and one to ones with the teaching staff I learnt how good OO programming should be structured, tested and presented.
 
-## Technologies Used
+## Technologies used
 
 - Ruby
 - Rspec
@@ -36,7 +36,7 @@ $ cd FAAST-tube-system
 $ rspec
 ```
 
-## Favourite Code Snippet
+## Favourite code snippet
 
 Train method for moving from station to station:
 
