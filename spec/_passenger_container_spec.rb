@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'passenger_container'
 
 shared_examples "a passenger container" do
